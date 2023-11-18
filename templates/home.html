@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <h1 class="red-text">Blog</h1>
+  <h1 class="blue-text">管理者: ShiroatoHiro</h1>
+  <h4>あなたは {{ nickname }} </h4>
+  <a href="{{ url_for('signup') }}">Signup</a><br>
+  <a href="{{ url_for('login') }}">Login</a><br>
+  <a href="{{ url_for('logout') }}">Logout</a>
+  <ul>
+    {% for thread in threads %}
+      <li>
+        <a href="{{ url_for('view_thread', thread_id=thread.id) }}">{{ thread.id }} : {{ thread.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <h4>{{ only_me_new_thread | safe }} </h4>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <a href="{{ url_for('home') }}">Back to Home</a>
+  <h4>あなたは {{ nickname }} </h4>
+  <!--現在までのBlogの中身を表示-->
+  <h1 class="red-text">ブログID : {{ thread.id }}</h1>
+  <h1 class="blue-text">ブログタイトル : {{ thread.title }}</h1>
+  <div>
+    {{me_input_place | safe}}
+  </div>
+  <div>
+    {{me_blog_before | safe}}
+  </div>
+  <!--コメント-->
+  <p>=====================================================================================================================</p>
+  <h1 class="green-text">コメント</h1>
+  <ul>
+    {% for post, nickname in posts_with_nicknames %}
+      <li>
+        <p>コメントID: {{ post.id }} / 時間: {{ post.time }} / ニックネーム: {{ nickname }} ＞<br> {{ post.content | safe }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+  <!--このBlogに対して新しくPOSTする-->
+  <form method="POST">
+    <label for="comment">Create Comment</label>
+    <textarea id="comment" class="comment_form" name="comment" rows="10" required></textarea>
+    <br>
+    <input type="submit" value="Create Comment">
+  </form>
+  <br>
+  <br>
+  <form method="POST">
+    <label for="delete_comment">Delete Comment（削除したいコメントIDを記入してください）<br>※自分のコメントのみ削除できます</label><br>
+    <input type="text" id="delete_comment" name="delete_comment" required>
+    <br>
+    <input type="submit" value="Delete Comment">
+  </form>
+  <p class="red-text">{{ massage_for_delete }}</p>
+</body>
+</html>
+

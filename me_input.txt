@@ -1,0 +1,8 @@
+<form method="POST">
+    <label for="blog_title">Title</label>
+    <input type="text" id="blog_title" name="blog_title" value="{}" required>
+    <br>
+    <label for="me_blog">Change Blog</label>
+    <textarea id="me_blog" name="me_blog" rows="10" class="comment_form">{}</textarea>
+    <input type="submit" value="Blog Change">
+</form>
