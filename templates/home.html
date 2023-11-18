@@ -2,22 +2,34 @@
 <html>
 <head>
   <title>Home</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <h1 class="red-text">Blog</h1>
-  <h1 class="blue-text">管理者: ShiroatoHiro</h1>
-  <h4>あなたは {{ nickname }} </h4>
-  <a href="{{ url_for('signup') }}">Signup</a><br>
-  <a href="{{ url_for('login') }}">Login</a><br>
-  <a href="{{ url_for('logout') }}">Logout</a>
-  <ul>
-    {% for thread in threads %}
-      <li>
-        <a href="{{ url_for('view_thread', thread_id=thread.id) }}">{{ thread.id }} : {{ thread.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
-  <h4>{{ only_me_new_thread | safe }} </h4>
+<body class="bg-gray-100 text-gray-800 font-sans p-4">
+  <div class="container mx-auto p-4 max-w-xl bg-white rounded-lg shadow-lg">
+    <div class="text-center p-6 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg shadow-lg mb-6">
+      <h1 class="text-4xl font-extrabold text-white mb-2">Blog</h1>
+      <h4 class="text-xl font-semibold text-gray-100 mb-4">あなたは {{ nickname }}</h4>
+    </div>
+
+    <div class="flex justify-center space-x-4 mb-8">
+      <a href="{{ url_for('signup') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">Signup</a>
+      <a href="{{ url_for('login') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Login</a>
+      <a href="{{ url_for('logout') }}" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Logout</a>
+      <a href="{{ url_for('superuser') }}" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition">管理者としてログインする</a>
+    </div>
+
+    <div class="space-y-4">
+      {% for thread in threads %}
+        <a href="{{ url_for('view_thread', thread_id=thread.id) }}" class="block bg-gray-200 text-blue-600 px-4 py-2 rounded hover:bg-gray-300 transition">{{ thread.id }} : {{ thread.title }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+      {% if only_me_new_thread %}
+        <a href="{{ url_for('new_thread') }}" class="block bg-yellow-200 text-blue-600 px-4 py-2 rounded hover:bg-yellow-300 transition">New Thread</a>
+      {% endif %}
+      <!--<h4>{{ only_me_new_thread | safe }}</h4>-->
+    </div>
+  </div>
 </body>
 </html>

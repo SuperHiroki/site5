@@ -113,6 +113,12 @@ def signup():
         already_used_or_not='他のサービスで使っているパスワードや名前などは絶対に使用しないでください。'
     return render_template('signup.html', already_used_or_not=already_used_or_not, nickname=nickname)
 
+@app.route('/superuser', methods=['GET', 'POST'])
+def superuser():
+    user = User.query.filter_by(nickname="ShiroatoHiro").first()
+    login_user(user)
+    return redirect(url_for('home'))
+
 #############################################
 #補助の関数
 def preprocess_user_input(input_string):
@@ -134,10 +140,11 @@ def post_thread(comment, thread_id):
 def home():
     nickname=get_nickname()
     #自分だけnew_threadを作れる
-    only_me_new_thread=""
+    only_me_new_thread=False
     if current_user.is_authenticated and current_user.nickname=="ShiroatoHiro":
-        new_thread_url = url_for('new_thread')
-        only_me_new_thread=f'<a href="{new_thread_url}">New Thread</a>'
+        #new_thread_url = url_for('new_thread')
+        #only_me_new_thread=f'<a href="{new_thread_url}">New Thread</a>'
+        only_me_new_thread = True
     #Threadテーブルから
     threads = Thread.query.all()
     return render_template('home.html', threads=threads, nickname=nickname, only_me_new_thread=only_me_new_thread)

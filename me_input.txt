@@ -1,8 +1,13 @@
-<form method="POST">
-    <label for="blog_title">Title</label>
-    <input type="text" id="blog_title" name="blog_title" value="{}" required>
-    <br>
-    <label for="me_blog">Change Blog</label>
-    <textarea id="me_blog" name="me_blog" rows="10" class="comment_form">{}</textarea>
-    <input type="submit" value="Blog Change">
+<form method="POST" class="space-y-4 bg-white p-6 rounded-lg shadow-lg border border-gray-300 max-w-lg mx-auto">
+    <div>
+        <label for="blog_title" class="block text-sm font-medium text-gray-700">Title</label>
+        <input type="text" id="blog_title" name="blog_title" value="{}" required class="mt-1 px-3 py-2 border border-gray-300 rounded-md w-full">
+    </div>
+    <div>
+        <label for="me_blog" class="block text-sm font-medium text-gray-700">Change Blog</label>
+        <textarea id="me_blog" name="me_blog" rows="10" class="mt-1 p-3 border border-gray-300 rounded-md w-full">{}</textarea>
+    </div>
+    <div>
+        <input type="submit" value="Blog Change" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition">
+    </div>
 </form>
